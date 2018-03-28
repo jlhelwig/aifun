@@ -68,7 +68,40 @@ const trainingData = [
     input: "This goodly frame, the earth, seems to me a sterile promontory, this most excellent canopy, the air, look you, this brave o'erhanging firmament, this majestical roof fretted with golden fire, why, it appears no other thing to me than a foul and pestilent congregation of vapours.",
     output: { Shakespeare: 1 }
 }
-
+,{
+    input: "If you tell the truth, you don’t have to remember anything.",
+    output: { Twain: 1 }
+},{
+    input: "The secret of getting ahead is getting started.",
+    output: { Twain: 1 }
+},{
+    input: "Courage is resistance to fear, mastery of fear – not absence of fear.",
+    output: { Twain: 1 }
+},{
+    input: "The fear of death follows from the fear of life. A man who lives fully is prepared to die at any time.",
+    output: { Twain: 1 }
+},{
+    input: "Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover.",
+    output: { Twain: 1 }
+},{
+    input: "I have never let my schooling interfere with my education.",
+    output: { Twain: 1 }
+},{
+    input: "The lack of money is the root of all evil.",
+    output: { Twain: 1 }
+},{
+    input: "Never put off till tomorrow what may be done day after tomorrow just as well",
+    output: { Twain: 1 }
+},{
+    input: "Whenever you find yourself on the side of the majority, it is time to pause and reflect.",
+    output: { Twain: 1 }
+},{
+    input: "Don’t go around saying the world owes you a living. The world owes you nothing. It was here first.",
+    output: { Twain: 1 }
+},{
+    input: "Keep away from people who try to belittle your ambitions. Small people always do that, but the really great make you feel that you, too, can become great.",
+    output: { Twain: 1 }
+}
 ];
 
 let trainedNet;
@@ -87,9 +120,7 @@ function processTrainingData(data) {
 }
 
 function train(data) {
-   let net = new brain.NeuralNetwork({
-     hiddenLayers:[25,10,5]
-   });
+   let net = new brain.NeuralNetwork();
    net.train(processTrainingData(data));
    trainedNet = net.toFunction();
    console.log('Finished training...');
@@ -104,12 +135,14 @@ function execute(input) {
 
 train(trainingData);
 
-console.log("it worked!: Results should read: Shakespeare, Oxford, Oxford, Shakespeare, hidden layers 25, 10, 5");
+console.log("it worked!: Results should read: Shakespeare, Twain, Oxford, Shakespeare, Twain. Hidden layers 25, 10, 5");
 console.log(execute("All causes shall give way: I am in blood Stepp’d in so far that, should I wade no more, Returning were as tedious as go o’er."));
 //shakespeare
-console.log(execute("My Lord Howard was the worst villain that lived in this earth"));
-//Oxford
+console.log(execute("Whenever you find yourself on the side of the majority, it is time to pause and reflect."));
+//Twain
 console.log(execute("The trickling tears that fall along my cheeks,The secret sighs that show my inward grief, The present pains perforce that Love aye seeks, Bid me renew my cares without relief; In woeful song, in dole display, My pensive heart for to betray."));
 //Oxford
 console.log(execute("From women's eyes this doctrine I derive: They sparkle still the right Promethean fire; They are the books, the arts, the academes, That show, contain, and nourish all the world."));
 //Shakespeare
+console.log(execute("The man who does not read has no advantage over the man who cannot read."));
+//Twain
